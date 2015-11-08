@@ -17,7 +17,7 @@ def index():
     Returns: 
         render home.html. 
     '''
-    sms(content='hair_cut_reminder: online')
+    #sms(content='hair_cut_reminder: online')
     return render_template('home.html')
 
 @app.route('/houseclean')
@@ -35,4 +35,9 @@ def cleaner():
 
 if __name__=='__main__':
     from send_txt import sms
-    app.run(debug=True)
+    import sys
+    if len(sys.argv)>1:
+        port = int(sys.argv[1])
+    else:
+        port = 5000
+    app.run(debug=True,port=port)
