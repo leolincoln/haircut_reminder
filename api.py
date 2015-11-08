@@ -11,14 +11,14 @@ import traceback
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
     '''
     Returns: 
         render home.html. 
     '''
-    files =[]
-    return render_template('home.html',files = files)
+    sms(content='hair_cut_reminder: online')
+    return render_template('home.html')
 
 @app.route('/houseclean')
 def confidence():
@@ -34,6 +34,5 @@ def cleaner():
     return render_template('anniversary.html')
 
 if __name__=='__main__':
-    from send_txt import email
-    email(address='8728068540@tmomail.net',content='this is working right?')
+    from send_txt import sms
     app.run(debug=True)
