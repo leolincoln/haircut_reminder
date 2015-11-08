@@ -3,6 +3,19 @@ import threading
 import time
 import smtplib
 from email.mime.text import MIMEText
+def carrier_suffix():
+    result = {}
+    result['alltel'] = '@message.alltel.com'
+    result['att'] = '@txt.att.net'
+    result['boost'] = '@myboostmobile.com'
+    result['nextel'] = '@messaging.nextel.com'
+    result['sprint'] = '@messaging.sprintpcs.com'
+    result['tmobile'] = '@tmomail.net'
+    result['uscellular'] = '@mms.uscc.net'
+    result['verizon'] = '@vtext.com'
+    result['virgin'] = '@vmobl.com'
+    return result
+
 '''
 Carrier Email to SMS Gateway
 *****************************************************************
@@ -41,6 +54,10 @@ Virgin Mobile USA [10-digit phone number]@vmobl.com
 Example: 1234567890@vmobl.com
 
 '''
+def sms(phone = '2243100552',content=None,subject=None,carrier='sprint'): 
+    suffix = carrier_suffix()
+    email_address =str(phone)+suffix[carrier.strip()]
+    email(address=email_address,content=content,subject=subject)
 
 def email(address='leoliu@u.northwestern.edu',content=None,subject=None):
 
@@ -62,7 +79,3 @@ def email(address='leoliu@u.northwestern.edu',content=None,subject=None):
     server.login(username,password)
     server.sendmail(msg['From'], [address], msg.as_string())
     server.quit()
-
-if __name__ == '__main__':
-    email(address='2243100552@messaging.sprintpcs.com')
-    #check_cass()
