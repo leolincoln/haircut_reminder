@@ -36,8 +36,4 @@ def cleaner():
 if __name__=='__main__':
     from send_txt import sms
     import sys
-    if len(sys.argv)>1:
-        port = int(sys.argv[1])
-    else:
-        port = 5000
-    app.run(debug=True,port=port)
+    app.run(debug=True,port=environ.get("PORT", 5000), )
