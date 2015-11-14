@@ -54,7 +54,7 @@ Virgin Mobile USA [10-digit phone number]@vmobl.com
 Example: 1234567890@vmobl.com
 
 '''
-def sms(phone = '2243100552',content=None,subject=None,carrier='sprint'): 
+def sms(phone = '2243100552',content=None,subject=None,carrier='sprint'):
     suffix = carrier_suffix()
     email_address =str(phone)+suffix[carrier.strip()]
     email(address=email_address,content=content,subject=subject)
@@ -77,5 +77,6 @@ def email(address='leoliu@u.northwestern.edu',content=None,subject=None):
     server.ehlo()
     server.starttls()
     server.login(username,password)
+    print msg.as_string()
     server.sendmail(msg['From'], [address], msg.as_string())
     server.quit()
